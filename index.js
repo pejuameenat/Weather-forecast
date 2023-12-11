@@ -24,11 +24,10 @@ function foreCast(searchValue) {
     .then((response) => {
        city.textContent = searchValue
         if(!response.ok){
-            throw new Error(`Error ${response.status} encountered while searching...`)
+            throw new Error(`${response.status} encountered while searching...`)
         }
         return response.json()})
     .then((data) =>{
-        console.log(data);
         const tempBold = document.querySelector('.temp-bold');
         const weather = document.querySelector('.weather');
         const windy = document.querySelector('.temp-pg');
@@ -55,7 +54,6 @@ function dateBuilder(d){
      const year = d.getFullYear();
 
      return dateText.textContent =  `${day}, ${date}, ${month}, ${year}.`;
-
 }
 
 dateBuilder(now);
