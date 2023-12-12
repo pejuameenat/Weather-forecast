@@ -5,6 +5,7 @@ const dateText = document.querySelector('.date');
 const submit = document.querySelector('#submit');
 const body= document.querySelector('body');
 const now = new Date();
+const header = document.querySelector('header')
 
 
 const backgrounds = ['./image/mountain.jpg', './image/dark-cloud.jpg', './image/grassy-cloud.jpg']
@@ -22,7 +23,13 @@ const renderText = function(msg){
 function foreCast(searchValue) {
   fetch(`https://goweather.herokuapp.com/weather/${searchValue}`)
     .then((response) => {
-       city.textContent = searchValue
+      if(!searchValue){
+        search.style.border = '#f00';
+        const em  = document.createElement('em')
+        em.textContent='Please enter a valid city!'
+        header.insertAdjacentElement('afterend', em) 
+      }
+       city.textContent = searchValue;
         if(!response.ok){
             throw new Error(`${response.status} encountered while searching...`)
         }
@@ -43,6 +50,11 @@ submit.addEventListener('click', function(){
     foreCast(search.value)
 });
  
+search.addEventListener('keyup', function(e){
+  if (e.key === "Enter") {
+    foreCast(search.value)
+  }
+})
 
 function dateBuilder(d){
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
