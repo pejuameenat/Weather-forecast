@@ -31,19 +31,23 @@ function foreCast(searchValue) {
       }
        city.textContent = searchValue;
         if(!response.ok){
-            throw new Error(`${response.status} encountered while searching...`)
+            throw new Error(`${response.status} encountered while searching!..`)
         }
         return response.json()})
     .then((data) =>{
+      console.log(data);
+      const {temperature, description, wind} = data;
+      if(data.temperature === '' || data.description === '' || data.wind === ''){
+        throw new Error("Sorry! We can't find the weather information for this place.")
+      }
         const tempBold = document.querySelector('.temp-bold');
         const weather = document.querySelector('.weather');
         const windy = document.querySelector('.temp-pg');
-
-        const {temperature, description, wind} = data;
+        
           tempBold.textContent = temperature;
           weather.textContent = description;
           windy.textContent = `wind: ${wind}`
-    }).catch(err => renderText(`(Error ${err.message}) Bad things happened while accessing the page!`));
+    }).catch(err => renderText(`(Error ${err.message}) country/city not found.`));
 }
  
 submit.addEventListener('click', function(){
