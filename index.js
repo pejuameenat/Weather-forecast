@@ -8,26 +8,25 @@ const now = new Date();
 const header = document.querySelector('header')
 
 
-const backgrounds = ['./image/mountain.jpg', './image/dark-cloud.jpg', './image/grassy-cloud.jpg']
+const backgrounds = ['./image/mountain.jpg', './image/dark-cloud.jpg', './image/grassy-cloud.jpg', './image/pattern-bg.avif']
 function bg(){
-    const linear = 'linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))'
+    const linear = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
     let index = Math.floor(Math.random() * backgrounds.length);
     body.style.backgroundImage = `${linear}, url(${backgrounds[index]})`
 }
 bg()
 
-
 const renderText = function(msg){
   degree.insertAdjacentText('afterbegin', msg)
 }
+
 function foreCast(searchValue) {
   fetch(`https://goweather.herokuapp.com/weather/${searchValue}`)
     .then((response) => {
       if(!searchValue){
-        search.style.border = '#f00';
         const em  = document.createElement('em')
         em.textContent='Please enter a valid city!'
-        header.insertAdjacentElement('afterend', em) 
+        header.insertAdjacentElement('afterend', em);
       }
        city.textContent = searchValue;
         if(!response.ok){
@@ -35,7 +34,6 @@ function foreCast(searchValue) {
         }
         return response.json()})
     .then((data) =>{
-      console.log(data);
       const {temperature, description, wind} = data;
       if(data.temperature === '' || data.description === '' || data.wind === ''){
         throw new Error("Sorry! We can't find the weather information for this place.")
