@@ -48,6 +48,7 @@ function foreCast(searchValue) {
     }).catch(err => renderText(`(Error ${err.message}) country/city not found.`));
 }
  
+ 
 submit.addEventListener('click', function(){
     foreCast(search.value)
 });
