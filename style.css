@@ -86,3 +86,8 @@ em{
     text-align: center;
     font-size: .9rem;
 }
+@media (max-width: 768px){
+    #submit{
+        margin-top:  1rem;
+    }
+}
