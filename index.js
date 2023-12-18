@@ -4,11 +4,10 @@ const degree = document.querySelector('.current-degree');
 const dateText = document.querySelector('.date');
 const submit = document.querySelector('#submit');
 const body= document.querySelector('body');
-const now = new Date();
-const header = document.querySelector('header')
+const header = document.querySelector('header');
 
 
-const backgrounds = ['./image/mountain.jpg', './image/dark-cloud.jpg', './image/grassy-cloud.jpg', './image/pattern-bg.avif']
+const backgrounds = ['./image/mountain.jpg', './image/svg-weather.avif', './image/grassy-cloud.jpg', './image/thunder.avif']
 function bg(){
     const linear = 'linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))'
     let index = Math.floor(Math.random() * backgrounds.length);
@@ -48,7 +47,6 @@ function foreCast(searchValue) {
     }).catch(err => renderText(`(Error ${err.message}) country/city not found.`));
 }
  
- 
 submit.addEventListener('click', function(){
     foreCast(search.value)
 });
@@ -59,6 +57,7 @@ search.addEventListener('keyup', function(e){
   }
 })
 
+const now = new Date();
 function dateBuilder(d){
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
