@@ -34,7 +34,7 @@ function foreCast(searchValue) {
         return response.json()})
     .then((data) =>{
       const {temperature, description, wind} = data;
-      if(data.temperature === '' || data.description === '' || data.wind === ''){
+      if(temperature === '' || description === '' || wind === ''){
         throw new Error("Sorry! We can't find the weather information for this place.")
       }
         const tempBold = document.querySelector('.temp-bold');
